@@ -6,5 +6,33 @@
     {
         "name" : "Annunciation of the Mother of God Byzantine Catholic Church",
         "location" : {"lat" : 41.6236295948914, "lng": -87.91307575246142}
+    },
+    {
+        "name" : "St. Joseph's Catholic Church",
+        "location" : {"lat" : 41.508977233836994, "lng": -88.11445543169152}
+    },
+    {
+        "name" : "Nonnie's Pizza",
+        "location" : {"lat" : 41.750500048930704, "lng": -88.02386345232648}
+    },
+    {
+        "name" : "Tivoli Theatrere",
+        "location" : {"lat" : 41.796486807110675, "lng": -88.00923163139957}
+    },
+    {
+        "name" : "Guaranteed Rate Field",
+        "location" : {"lat" : 41.83016521534584, "lng": -87.63372966576388}
+    },
+    {
+        "name" : "Ember's Tap House",
+        "location" : {"lat" : 41.58921190490763, "lng": -88.05825791576159}
+    },
+    {
+        "name" : "Bricks and Minifigs of Crest Hill",
+        "location" : {"lat" : 41.59505040987998, "lng": -88.11996786440375}
+    },
+    {
+        "name" : "St. Joseph's Catholic Church",
+        "location" : {"lat" : 42.06125319809779, "lng": -88.04164528833442}
     }
 ]
