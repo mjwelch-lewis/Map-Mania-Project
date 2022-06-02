@@ -1,0 +1,10 @@
+[
+    {
+        "name" : "St. James at Sag Bridge Catholic Church",
+        "location" : {"lat" : 41.70047222397206, "lng": -87.9335799795665}
+    },
+    {
+        "name" : "Annunciation of the Mother of God Byzantine Catholic Church",
+        "location" : {"lat" : 41.6236295948914, "lng": -87.91307575246142}
+    }
+]
