@@ -1,9 +1,13 @@
 var myMap;
-var myLocations;
+var locations;
 
 function initMap() {
-    $.getJSON("locations.json", function (locationObjects) {
-        myLocations = locationObjects.map();
+
+    //gets location data from JSON file and loads it into an array
+    $.getJSON("locations.json", function (data) {
+        locations = data.map(function(location) {
+            return location.location;
+        });
     });
 
     //inserts new Google Map into DOM
@@ -18,9 +22,10 @@ function initMap() {
         checkZoomLevel();     
     });
 
-    myLocations.array.forEach(element => {
-        addMarker(element);
-    });
+    //creates a marker for each location found in the locations.json file
+    for(var i = 0; i < locations.length; i++) {
+        addMarker(locations[i]);
+    }
 }
 
 //checks and prints whether the location is in the map's current bounds
@@ -42,7 +47,12 @@ function checkZoomLevel() {
 
 function addMarker(location) {
     var marker = new google.maps.Marker({
-        position: myLocations.location,
+        position: location,
         map: myMap
     });
 }
+
+//forces ajax requests to run synchronously
+$.ajaxSetup({
+    async: false
+});
