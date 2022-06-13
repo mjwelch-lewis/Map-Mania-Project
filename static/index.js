@@ -20,17 +20,21 @@ function initMap() {
     //inserts new Google Map into DOM
     myMap = new google.maps.Map(document.getElementById('map'), {center: {lat: 41.75, lng: -87.75}, zoom: 10});
 
-    var modal = document.getElementById("instructions-modal");
+    var instructions = document.getElementById("instructions-modal");
     var close = document.getElementsByClassName("close")[0];
     var scoreboard = document.getElementById("scoreboard");
     var scoreValue = document.getElementById("score");
+    var win = document.getElementById("win-modal");
+    var help = document.getElementById("help");
 
+    //hides win modal
+    win.style.display = "none";
     //displays instructions modal when page loads
-    modal.style.display = "block";
+    instructions.style.display = "block";
     
     //closes the instructions modal when the user clicks the X
     close.onclick = function() {
-        modal.style.display = "none";
+        instructions.style.display = "none";
     }
 
     //activates cheat to win automatically
@@ -38,18 +42,25 @@ function initMap() {
         triggerWin();
     }
 
+    help.onclick = function() {
+        instructions.style.display = "block";
+        console.log("did this");
+    }
+
     //performs checks when map returns to 'idle' state
     google.maps.event.addListener(myMap, 'idle', function() {
-        if(checkInBounds(locations[currentLocation]) == true && checkZoomLevel() >= 16) {
-            score += 5;
-            scoreValue.value = score;
-            addMarker(locations[currentLocation]);
-            alert("Location discovered: " + names[currentLocation]);
-            setTimeout(function(){myMap.setZoom(10)}, 1000);
-            currentLocation++;
-            if(currentLocation > locations.length) {
-                triggerWin();
+        if(currentLocation < locations.length) {
+            if(checkInBounds(locations[currentLocation]) == true && checkZoomLevel() >= 11) {
+                score += 5;
+                scoreValue.value = score;
+                addMarker(locations[currentLocation]);
+                alert("Location discovered: " + names[currentLocation]);
+                setTimeout(function(){myMap.setZoom(10)}, 1000);
+                currentLocation++;
             }
+        }
+        else {
+            triggerWin();
         }
     });
 }
@@ -97,7 +108,7 @@ function triggerWin() {
         }
         document.getElementById("score").value = 45;
     }
-    alert("You found all 9 of Matt's favorite locations! Refresh the page to play again!");
+    document.getElementById("win-modal").style.display = "block";
     won = true;
 }
 
