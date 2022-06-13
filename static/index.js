@@ -19,11 +19,24 @@ function initMap() {
     //inserts new Google Map into DOM
     myMap = new google.maps.Map(document.getElementById('map'), {center: {lat: 41.75, lng: -87.75}, zoom: 10});
 
-    //static location coordinates to check against (Chicago, IL)
+    var modal = document.getElementById("instructions-modal");
+    var span = document.getElementsByClassName("close")[0];
+
+    modal.style.display = "block";
+    
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+    }
 
     //performs checks when map returns to 'idle' state
     google.maps.event.addListener(myMap, 'idle', function() {
-        if(checkInBounds(locations[currentLocation]) == true && checkZoomLevel() >= 15) {
+        if(checkInBounds(locations[currentLocation]) == true && checkZoomLevel() >= 16) {
             alert("Location discovered: " + names[currentLocation]);
             score += 5;
             document.getElementById("score").value = score;

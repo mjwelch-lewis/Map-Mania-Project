@@ -12,6 +12,16 @@
             <p>Hint: <input type="text" id="hint" disabled></p>
             <p>Score: <input type="text" id="score" disabled></p>
 
+            <div id="instructions-modal" class="modal">
+                <div class="instructions">
+                    <span class="close">&times;</span>
+                    <h2>Instructions:</h2>
+                    <p>Pan and zoom to each of Matt's 9 favorite locations!</p>
+                </div>
+          
+            </div>
+            <br>
+
             <div id="map"></div>
 
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATtijy0wKjRQzyn4HoPkNbhwOYRXH6-SI&callback=initMap" async defer></script>
