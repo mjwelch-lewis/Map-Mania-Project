@@ -1,5 +1,8 @@
 var myMap;
 var locations;
+var names;
+var currentLocation = 0;
+var score = 0;
 
 function initMap() {
 
@@ -8,27 +11,29 @@ function initMap() {
         locations = data.map(function(location) {
             return location.location;
         });
+        names = data.map(function(location) {
+            return location.name;
+        });
     });
 
     //inserts new Google Map into DOM
-    myMap = new google.maps.Map(document.getElementById('map'), {center: {lat: 0, lng: 0}, zoom: 3});
+    myMap = new google.maps.Map(document.getElementById('map'), {center: {lat: 41.75, lng: -87.75}, zoom: 10});
 
     //static location coordinates to check against (Chicago, IL)
-    var location1 = new google.maps.LatLng(41.8781, -87.6298);
 
     //performs checks when map returns to 'idle' state
     google.maps.event.addListener(myMap, 'idle', function() {
-        checkInBounds(location1);  
-        checkZoomLevel();     
+        if(checkInBounds(locations[currentLocation]) == true && checkZoomLevel() >= 15) {
+            alert("Location discovered: " + names[currentLocation]);
+            score += 5;
+            document.getElementById("score").value = score;
+            addMarker(locations[currentLocation]);
+            currentLocation++;
+        }
     });
-
-    //creates a marker for each location found in the locations.json file
-    for(var i = 0; i < locations.length; i++) {
-        addMarker(locations[i]);
-    }
 }
 
-//checks and prints whether the location is in the map's current bounds
+//returns true or false and prints a hint based on whether the location is within the map's current bounds
 function checkInBounds(location) {
     var inBounds = false;
 
@@ -36,20 +41,31 @@ function checkInBounds(location) {
         inBounds = true;
     }
 
+    if(inBounds) {
+        document.getElementById("hint").value = "You're getting warmer!";
+    }
+    else {
+        document.getElementById("hint").value = "You're getting colder!";
+    }
     console.log("In Bounds = " + inBounds);
+    return inBounds;
 }
 
-//checks and prints the map's current zoom level
+//checks, returns, and prints the map's current zoom level
 function checkZoomLevel() {
     var zoom = myMap.getZoom();
     console.log("Zoom Level = " + zoom);
+    return zoom;
 }
 
+//creates a new marker for a location
 function addMarker(location) {
     var marker = new google.maps.Marker({
         position: location,
+        label: names[currentLocation],
         map: myMap
     });
+    
 }
 
 //forces ajax requests to run synchronously
