@@ -40,7 +40,7 @@ function initMap() {
 
     //performs checks when map returns to 'idle' state
     google.maps.event.addListener(myMap, 'idle', function() {
-        if(checkInBounds(locations[currentLocation]) == true && checkZoomLevel() >= 11) {
+        if(checkInBounds(locations[currentLocation]) == true && checkZoomLevel() >= 16) {
             score += 5;
             scoreValue.value = score;
             addMarker(locations[currentLocation]);
