@@ -39,7 +39,9 @@ function initMap() {
 
     //activates cheat to win automatically
     scoreboard.ondblclick = function() {
-        triggerWin();
+        if (confirm("Are you sure you want to skip right to the answers?")) {
+            triggerWin();
+        } 
     }
 
     help.onclick = function() {
